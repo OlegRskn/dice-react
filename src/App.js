@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+let dices = [
+  "/dices/dice(1).png",
+  "/dices/dice(2).png",
+  "/dices/dice(3).png",
+  "/dices/dice(4).png",
+  "/dices/dice(5).png",
+  "/dices/dice(6).png",
+];
+
+function getRandomDiceIndex() {
+  return Math.floor(Math.random() * dices.length);
+}
+
+function Dice({ description, className, diceIndex }) {
+  const srcValue = dices[diceIndex];
+
+  return <img className={className} src={srcValue} alt={description} />;
+}
+
+function Button({ onRoll, className }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button className={className} onClick={onRoll}>
+      Roll the dice
+    </button>
   );
 }
 
-export default App;
+export default function Screen() {
+  const [diceIndex, setDiceIndex] = useState(0);
+  return (
+    <>
+      <div className="dice">
+        <Dice
+          className="dice__image"
+          description="A dice"
+          diceIndex={diceIndex}
+        />
+      </div>
+      <Button
+        className="button"
+        onRoll={() => setDiceIndex(getRandomDiceIndex())}
+      />
+    </>
+  );
+}
