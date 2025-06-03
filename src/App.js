@@ -13,10 +13,8 @@ function getRandomDiceIndex() {
   return Math.floor(Math.random() * dices.length);
 }
 
-function Dice({ description, className, diceIndex }) {
-  const srcValue = dices[diceIndex];
-
-  return <img className={className} src={srcValue} alt={description} />;
+function Dice({ description, className, src }) {
+  return <img className={className} src={src} alt={description} />;
 }
 
 function Button({ onRoll, className }) {
@@ -29,14 +27,12 @@ function Button({ onRoll, className }) {
 
 export default function Screen() {
   const [diceIndex, setDiceIndex] = useState(0);
+  const srcValue = dices[diceIndex];
+
   return (
     <>
       <div className="dice">
-        <Dice
-          className="dice__image"
-          description="A dice"
-          diceIndex={diceIndex}
-        />
+        <Dice className="dice__image" description="A dice" src={srcValue} />
       </div>
       <Button
         className="button"
