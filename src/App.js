@@ -32,7 +32,11 @@ export default function Screen() {
   return (
     <>
       <div className="dice">
-        <Dice className="dice__image" description="A dice" src={srcValue} />
+        <Dice
+          className="dice__image"
+          description={`Dice ${diceIndex + 1}`}
+          src={srcValue}
+        />
       </div>
       <Button
         className="button"
