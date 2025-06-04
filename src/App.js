@@ -26,7 +26,7 @@ function Button({ onRoll, className }) {
 }
 
 export default function Screen() {
-  const [diceIndex, setDiceIndex] = useState(0);
+  const [diceIndex, setDiceIndex] = useState(getRandomDiceIndex());
   const srcValue = dices[diceIndex];
 
   return (
