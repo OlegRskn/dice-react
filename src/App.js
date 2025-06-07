@@ -1,43 +1,17 @@
 import { useState } from "react";
-
-let dices = [
-  "/dices/dice(1).png",
-  "/dices/dice(2).png",
-  "/dices/dice(3).png",
-  "/dices/dice(4).png",
-  "/dices/dice(5).png",
-  "/dices/dice(6).png",
-];
+import Dice, { DICE_COUNT } from "./components/Dice/Dice";
+import Button from "./components/Button/Button";
 
 function getRandomDiceIndex() {
-  return Math.floor(Math.random() * dices.length);
+  return Math.floor(Math.random() * DICE_COUNT);
 }
 
-function Dice({ description, className, src }) {
-  return <img className={className} src={src} alt={description} />;
-}
-
-function Button({ onRoll, className }) {
-  return (
-    <button className={className} onClick={onRoll}>
-      Roll the dice
-    </button>
-  );
-}
-
-export default function Screen() {
+export default function App() {
   const [diceIndex, setDiceIndex] = useState(getRandomDiceIndex());
-  const srcValue = dices[diceIndex];
 
   return (
     <>
-      <div className="dice">
-        <Dice
-          className="dice__image"
-          description={`Dice ${diceIndex + 1}`}
-          src={srcValue}
-        />
-      </div>
+      <Dice className="dice__image" diceIndex={diceIndex} />
       <Button
         className="button"
         onRoll={() => setDiceIndex(getRandomDiceIndex())}
