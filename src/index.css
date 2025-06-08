@@ -6,6 +6,7 @@ body {
 #root {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   max-width: 420px;
   align-items: center;
   height: 420px;

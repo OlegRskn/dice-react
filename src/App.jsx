@@ -1,29 +1,29 @@
-import { useState } from "react";
-import Dice, { DICE_COUNT } from "./components/Dice/Dice";
 import Button from "./components/Button/Button";
-
-function getRandomDiceIndex() {
-  let indexArray = [];
-  const a = (count) => Math.floor(Math.random() * count);
-
-  for (let i = 0; i <= DICE_COUNT; i++) {
-    indexArray.push(a(DICE_COUNT));
-  }
-  return indexArray;
-}
+import Board from "./components/Board/Board";
+import getRandomDiceIndex from "./utils/getRandomIndexOfArray.js";
+import { DICE_COUNT } from "./components/Dice/Dice.jsx";
+import { useState } from "react";
+import Options from "./components/Options/Options.jsx";
 
 export default function App() {
-  const [diceIndex, setDiceIndex] = useState(getRandomDiceIndex());
+  const [diceIndex, setDiceIndex] = useState(() =>
+    getRandomDiceIndex(DICE_COUNT, 1)
+  );
+
+  const handleChangeCount = (count) => {
+    setDiceIndex(getRandomDiceIndex(DICE_COUNT, count));
+  };
+  const handleRoll = () => {
+    setDiceIndex(
+      getRandomDiceIndex(DICE_COUNT, diceIndex.length) // сколько уже есть
+    );
+  };
 
   return (
     <>
-      <Dice className="dice__image" diceIndex={diceIndex[0]} />
-      <Dice className="dice__image" diceIndex={diceIndex[1]} />
-
-      <Button
-        className="button"
-        onRoll={() => setDiceIndex(getRandomDiceIndex())}
-      />
+      <Board diceIndex={diceIndex} />
+      <Options max={DICE_COUNT} onChange={handleChangeCount} />
+      <Button className="button" onRoll={handleRoll} />
     </>
   );
 }

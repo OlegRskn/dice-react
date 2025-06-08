@@ -1,0 +1,7 @@
+.board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* 💡 вот это добавь */
+  justify-content: center;
+  gap: 12px; /* красиво расставит элементы */
+}
